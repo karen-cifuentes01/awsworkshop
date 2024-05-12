@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Web App</title>
+        <link rel="stylesheet" href="../static/css/styleAddRecipe.css" type="text/css" media="all"/>
+        <script src="../static/js/appAddRecipe.js" type="text/javascript"  charset=utf-8></script>
+        
+    </head>
+    <body onLoad = "load_dropdowns()">
+        <h1>Register Recipe</h1>
+        
+        <!--<form action="/insert_recipe" method="post">-->
+        <form>
+            <img src="../static/images/addRecipeImage.png"/><br/><br/>
+            
+            <div>
+                <label>Recipe Name</label> <input type="text" name="RecipeName"/><br/><br/>
+                <label>Description</label> <input type="text" name="Description"/><br/><br/>
+                <label>Category</label> 
+                    <select id="selectCategory" name="CategorySelected">
+                        <option>Choose a Category</option>
+                    </select><br/><br/>
+
+                <label>Preparation Time</label> <input type="number" name="PreparationTime"/><br/><br/>
+                <label>Servings</label> <input type="number" name="Servings"/><br/><br/>
+  
+                <label>Ingredients</label>
+                    <select id="selectIngredient">
+                        <option>Choose a Ingredient</option>
+                    </select>
+                    <textarea name="Ingredients" id="Ingredients"></textarea>
+                    <button onClick="add_ingredient(); return false;">Add Ingredient</button><br/><br/>
+                
+                <label>Steps</label> <textarea name="Steps"></textarea><br/><br/>
+                
+                <button onClick="{add_recipe()}" formaction="/insert_recipe" formmethod="post" id="addBtn">Add Recipe</button>
+            </div>
+        </form>
+        
+    </body>
+</html>
