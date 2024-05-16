@@ -21,7 +21,6 @@ def connectionSQL():
         
 def insert_reciperecord(RecipeName, Description, CategorySelected, PreparationTime, Servings, Ingredients, Steps):
     query = "INSERT INTO Recipes (RecipeName, Description, Category, PreparationTime, Servings, Ingredients, Steps, CreationDate) VALUES ('"+RecipeName+"', '"+Description+"', '"+CategorySelected+"', '"+PreparationTime+"', '"+Servings+"', '"+Ingredients+"', '"+Steps+"', NOW())"
-    print("INSERT QUERY!!",query)
     try:
         connection = connectionSQL()
         if connection != None:
@@ -29,11 +28,13 @@ def insert_reciperecord(RecipeName, Description, CategorySelected, PreparationTi
             cursor.execute(query)
             connection.commit()
             print("Recipe added")
+            return True
         else:
             print("Error in the connection")
-        
+            return False
     except Exception as err:
         print("Error creating the recipe", err)
+        return False
 
 
 def consult_recipeInformation(recipeName):

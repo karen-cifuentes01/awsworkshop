@@ -14,12 +14,12 @@
         <div class="container mt-3 bg-primary rounded">
             <h1>Register Recipe</h1>
 
-            <form>
+            <form enctype="multipart/form-data">
                 <img src="../static/images/addRecipeImage.png"/><br/><br/>
                 <div>
                     <div class="input-group mb-3">
                         <span class="input-group-text">Recipe Name</span>
-                        <input class="form-control" type="text" name="RecipeName"/>
+                        <input class="form-control" type="text" name="RecipeName" maxlength = "30"/>
                     </div>
                     
                     <div class="input-group mb-3">
@@ -64,6 +64,12 @@
                         <textarea class="form-control" name="Steps"></textarea><br/><br/>
                     </div>
                     
+                    
+                     <div class="input-group mb-3">
+                        <span class="input-group-text">Choose a file to upload:</span>
+                         <input type="file" name="photo" /><br/><br/>
+                    </div>
+                     
                     <button class="btn btn-light" onClick="{add_recipe()}" formaction="/insert_recipe" formmethod="post" id="addBtn">Add Recipe</button>
                 </div>
             </form>
