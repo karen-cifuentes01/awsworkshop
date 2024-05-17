@@ -1,6 +1,6 @@
 from flask import render_template, request, jsonify
 from database.db import connectionSQL, insert_reciperecord, consult_recipeInformation
-from controller.s3_control import connection_s3, upload_file_s3, save_file
+from controller.s3_control import connection_s3, upload_file_s3, save_file, get_file_s3
 
 def func_insert_recipe():
     data_recipe = request.form
@@ -19,12 +19,12 @@ def func_insert_recipe():
         else:
             return"<h1> Error creating the Recipe </h1>"
    
-
 def func_consult_recipedata():
     data_information = request.get_json()
-				  
     result = consult_recipeInformation(data_information["recipeName"])
     if result != None and len(result) != 0:
+        s3_connection = connection_s3()
+        name_file = get_file_s3(s3_connection, data_information["recipeName"])
         description = result[0][2]
         categoryText = result[0][3]
         preparationtime = result[0][4]
@@ -37,10 +37,10 @@ def func_consult_recipedata():
             "preparationtime": preparationtime,
             "servings": servings,
             "ingredients": ingredients,
-            "steps": steps
+            "steps": steps,
+            "photorecipes3":name_file
         }
     else:
         resp_data = {"status":"error"}
-				 
     return jsonify(resp_data)
     

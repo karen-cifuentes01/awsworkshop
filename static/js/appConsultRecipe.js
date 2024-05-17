@@ -23,6 +23,7 @@ function consult_recipedata(){
                 servingsInformation.innerText = data.servings;
                 ingredientsList.innerText = data.ingredients;
                 stepsInformation.innerText = data.steps;
+                document.getElementById("photoRecipe").src = "https://aws-bucketworkshop.s3.amazonaws.com/" + data.photorecipes3
             }
             else {
                 alert("The recipe was not found")

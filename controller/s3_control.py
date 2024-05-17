@@ -2,6 +2,9 @@ from boto3.session import Session
 from botocore.exceptions import ClientError
 from keys import ACCESS_KEY, SECRET_KEY
 
+
+bucket_name = "aws-bucketworkshop"
+
 def connection_s3():
     try:
         sesion_aws = Session(ACCESS_KEY, SECRET_KEY)
@@ -23,4 +26,13 @@ def upload_file_s3(s3_connection, photo_path):
     bucket_name = "aws-bucketworkshop"
     path_s3 = "imagesworkshop/" + photo_path.split("/")[2]
     s3_connection.meta.client.upload_file(photo_path, bucket_name, path_s3)
-        
+
+def get_file_s3(s3_connection, recipename):
+    bucket_repo = s3_connection.Bucket(bucket_name)
+    all_objects = bucket_repo.objects.all()
+    for object in all_objects:
+        path_file = object.key
+        name_file_s3 = path_file.split("/")[1].split(".")[0]
+        if name_file_s3 == recipename.replace(" ", ""):
+            return path_file
+    return None
